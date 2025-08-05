@@ -1,0 +1,64 @@
+#-------------------------------
+# 사이트 기본 정보
+title: "이태원쌤의 테크 블로그"
+description: "복잡한 기술을 쉽게 풀어, 실질적인 비즈니스 성과로"
+baseurl: "" # 하위 경로가 있는 경우 설정 (예: /blog)
+url: "https://aiwc.kr" # 도메인 주소
+
+# 날짜 형식 설정
+minima:
+  date_format: "%Y-%m-%d"
+
+#-------------------------------
+# Build Settings
+markdown: kramdown
+permalink: /:title/
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+
+paginate: 7
+paginate_path: "/blog/page/:num"
+
+
+#-------------------------------
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:name/
+  posts:
+    output: true
+    permalink: /blog/:slug/
+  projects:
+    output: true
+    permalink: /project/:slug/
+  categories:
+    output: true
+    permalink: /category/:name/
+
+# Pages Path
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
+sass:
+  sass_dir: _sass
+  style: compressed

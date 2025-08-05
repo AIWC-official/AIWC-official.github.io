@@ -1,0 +1,28 @@
+---
+layout: default
+title: Blog
+description: 복잡한 기술을 쉽게 풀어, 실질적인 비즈니스 성과로 연결합니다. AI, GitHub, 자동화 스크립팅 등 실용적인 기술 가이드와 인사이트를 30년 경험을 바탕으로 공유합니다.
+---
+
+<div class="container">
+  <div class="page-head">
+    {% if page.title %}
+      <h1 class="page-title">{{ page.title }}</h1>
+    {% endif %}
+    {% if page.description %}
+      <p class="page-description">{{ page.description }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="container blog-page">
+  <div class="row grid">
+    {% if site.posts.size > 0 %}
+      {% for post in paginator.posts offset:0 %}
+        {% include article.html %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% include pagination.html %}
