@@ -17,7 +17,7 @@
 
   .hero__title {
     margin-bottom: 0;
-    font-size: 80px;
+    font-size: 70px; /* 80px */
     line-height: 1.2;
     color: var(--heading-font-color);
 
@@ -45,7 +45,7 @@
 
   @media (max-width: $wide) {
     .hero__title {
-      font-size: 70px;
+      font-size: 60px; /* 70px */
     }
 
     .hero__description {
@@ -65,7 +65,7 @@
     }
 
     .hero__title {
-      font-size: 51px;
+      font-size: 41px; /* 51px */
 
       img {
         min-width: 120px;
@@ -80,7 +80,7 @@
 
   @media (max-width: $tablet) {
     .hero__title {
-      font-size: 45px;
+      font-size: 35px; /* 45px */
 
       img {
         min-width: 100px;
@@ -108,7 +108,7 @@
     }
 
     .hero__title {
-      font-size: 36px;
+      font-size: 26px; /* 36x */
 
       img {
         min-width: 60px;

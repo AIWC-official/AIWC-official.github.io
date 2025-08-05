@@ -1,0 +1,20 @@
+// _sass/5-custom/_code-styles.scss
+/* AI Tech Guide 코드 블록 커스터마이징 */
+code, kbd, samp {
+  font-size: 16px;
+  background-color: var(--syntax-highlighting-background);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+pre {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* 코드블록 첫 줄 여백 제거 */
+.highlight pre code {
+    display: block;
+    padding: 0;
+    text-indent: 0;
+}

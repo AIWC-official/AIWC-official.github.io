@@ -1,0 +1,93 @@
+{% comment %}
+=================================================
+LANDBOT EMBED SECTION
+=================================================
+
+사용법:
+<!-- 전체폭: 복사할 코드 시작 -->
+{% include section-landbot-embed.html 
+   config_url="https://storage.googleapis.com/landbot.pro/v3/H-3027592-PAJEGRSOACIOE1VP/index.json"
+   height="700px" 
+   fullwidth=true %}
+<!-- 복사할 코드 끝 -->
+
+<!-- 기본폭: 복사할 코드 시작 -->
+{% include section-landbot-embed.html 
+   config_url="https://storage.googleapis.com/landbot.pro/v3/H-3027592-PAJEGRSOACIOE1VP/index.json"
+   height="700px" %}
+<!-- 복사할 코드 끝 -->
+
+
+필수 파라미터:
+- config_url: 랜드봇 설정 JSON URL
+- height: 임베드 높이 (기본값: 700px)
+
+선택 파라미터:
+- fullwidth: true 설정 시 전체 폭 사용 (기본값: false)
+
+예시 사용:
+<!-- About 페이지에서 -->
+{% include section-landbot-embed.html 
+   config_url="https://storage.googleapis.com/landbot.pro/v3/H-3027592-PAJEGRSOACIOE1VP/index.json"
+   height="600px" %}
+
+<!-- Contact 페이지에서 -->
+{% include section-landbot-embed.html 
+   config_url="https://storage.googleapis.com/landbot.pro/v3/H-CONTACT-BOT-URL/index.json"
+   height="800px" %}
+=================================================
+{% endcomment %}
+
+<!-- 랜드봇 Embed 섹션 -->
+{% if include.fullwidth %}
+<section class="section section--landbot section--fullwidth">
+  <div class="landbot-container">
+{% else %}
+<section class="section section--landbot">
+  <div class="container">
+{% endif %}
+    <div class="row">
+      <div class="col col-12">
+        
+        <!-- 랜드봇 스크립트 로드 -->
+        <script SameSite="None; Secure" type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
+        
+        <!-- 랜드봇 컨테이너 -->
+        <div id="myLandbot" style="width: 100%; height: {{ include.height | default: '700px' }}"></div>
+        
+        <!-- 랜드봇 초기화 스크립트 -->
+        <script type="module">
+          var myLandbot = new Landbot.Container({
+            container: '#myLandbot',
+            configUrl: '{{ include.config_url }}',
+          });
+        </script>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 랜드봇 전체폭 섹션을 위한 CSS -->
+<style>
+.section--fullwidth .landbot-container {
+  width: 100vw;
+  max-width: none !important;
+  margin-left: calc(-50vw + 50%);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* 대안 방법: 특정 상황에서 사용 */
+.section--landbot.section--alternative {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0;
+}
+
+.section--landbot.section--alternative .landbot-container {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+}
+</style>

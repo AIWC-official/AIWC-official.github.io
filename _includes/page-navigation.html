@@ -15,7 +15,7 @@
     </a>
     {% endif %}
     <div class="prev__box">
-      <span class="page__nav page__nav__prev">Previous page</span>
+      <span class="page__nav page__nav__prev">이전 게시물</span>
       <h2 class="page__nav__title"><a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a></h2>
     </div>
   </div>
@@ -24,7 +24,7 @@
   {% if page.next.url %}
   <div class="page__next">
     <div class="next__box">
-      <span class="page__nav page__nav__next">Next page</span>
+      <span class="page__nav page__nav__next">다음 게시물</span>
       <h2 class="page__nav__title"><a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a></h2>
     </div>
     {% if page.next.image %}

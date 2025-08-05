@@ -59,16 +59,13 @@ h1 {
 
 h2 {
   font-size: $font-size-h2;
-  color: #1A3A5F; /* 짙은 파란색 계열로 변경 */
-  font-weight: 700; /* 두껍게 변경 */
-  text-shadow: 2px 2px 2px rgba(135, 206, 250, 0.25); /* 붉은 계열 그림자 */
-  padding-bottom: 6px;
-  border-bottom: 1px solid #ddd; /* 미묘한 구분선 */
-  margin-top: 1.6em; /* 여백 증가 */
+  font-weight: $heading-font-weight-h2; /* 추가된 부분 */
+  color: var(--heading-font-color-h2); /* 추가된 부분 */
 }
 
 h3 {
   font-size: $font-size-h3;
+  font-weight: $heading-font-weight-h3; /* 추가된 부분 */
 }
 
 h4 {
@@ -86,8 +83,8 @@ h6 {
 blockquote {
   margin: 60px -260px 60px -260px;
   font-family: $heading-font-family;
-  font-size: 60px;
-  font-weight: 700;
+  font-size: 40px;  /* 50px */
+  font-weight: 600;
   line-height: 1.2;
   text-align: center;
   color: var(--heading-font-color);
@@ -109,20 +106,20 @@ blockquote {
 
   @media (max-width: $wide) {
     margin: 60px -80px 60px -80px;
-    font-size: 50px;
+    font-size: 32px; /* 42px */
   }
 
   @media (max-width: $desktop) {
     margin: 40px 0;
-    font-size: 40px;
+    font-size: 28px; /* 38px */
   }
 
   @media (max-width: $tablet) {
-    font-size: 36px;
+    font-size: 26px; /* 36px */
   }
 
   @media (max-width: $mobile) {
-    margin: 32px 0;
+    margin: 22px 0; /* 32px */
     font-size: 28px;
   }
 }

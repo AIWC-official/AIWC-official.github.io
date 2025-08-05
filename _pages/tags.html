@@ -1,216 +1,59 @@
 ---
 layout: default
-title: 태그 목록
+title: Tags
 permalink: /tags/
 ---
 
-<div class="container">
-  <div class="page-head">
-    <h1 class="page-title">{{ page.title }}</h1>
-    <p class="page-description">세부 키워드로 관련 콘텐츠를 찾아보세요</p>
-  </div>
-</div>
+{% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+{% assign tag_words = site_tags | split:',' | sort %}
 
-<!-- 태그 클라우드 -->
-<div class="container">
-  <div class="tag-cloud">
-    <a href="javascript:void(0);" onclick="showAllPosts()" class="tag-link all-posts-link">
-      전체 게시물 보기
-    </a>
-    {% for tag in site.tags %}
-      <a href="javascript:void(0);" onclick="filterByTag('{{ tag[0] | downcase }}')" class="tag-link">
-        {{ tag[0] }}
-        <span>({{ tag[1].size }})</span>
-      </a>
-    {% endfor %}
-  </div>
-</div>
+{% for item in (0..site.tags.size) %}{% unless forloop.last %}
+{% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
 
-<!-- 선택된 태그의 게시물 -->
-<div class="container" id="tag-posts" style="display: none;">
-  <h2 class="recent-posts-title" id="selected-tag-title"></h2>
-  <div class="row grid" id="filtered-posts">
-  </div>
-</div>
+<!-- begin tags -->
+<div class="tags is-hidden" id="{{ this_word | downcase | url_decode }}">
 
-<!-- 기본 최근 게시물 -->
-<div class="container" id="recent-posts">
-  <h2 class="recent-posts-title">최근 게시물</h2>
-  <div class="row grid">
-    {% for post in site.posts limit:6 %}
-      {% include article.html %}
-    {% endfor %}
-  </div>
-</div>
-
-<!-- 포스트 데이터를 JavaScript 변수로 저장 -->
-<script>
-  var allPosts = [
-    {% for post in site.posts %}
-      {
-        title: "{{ post.title | escape }}",
-        url: "{{ post.url | relative_url }}",
-        date: "{{ post.date | date: "%Y-%m-%d" }}",
-        excerpt: "{{ post.description | default: post.excerpt | strip_html | strip_newlines | escape }}",
-        image: "{{ post.image | relative_url }}",
-        tags: [
-          {% for tag in post.tags %}
-            "{{ tag | downcase }}"{% unless forloop.last %},{% endunless %}
-          {% endfor %}
-        ]
-      }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ];
-
-  // URL에서 태그 파라미터 확인
-  function getParameterByName(name) {
-    var url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-  }
-
-  // 전체 게시물 보기 함수
-  function showAllPosts() {
-  // URL 업데이트
-    window.history.pushState({}, '', '/tags/');
-  
-  // 태그 게시물 숨기고 최근 게시물 표시
-    document.getElementById('tag-posts').style.display = 'none';
-    document.getElementById('recent-posts').style.display = 'block';
-  }
-
-  // 태그별 게시물 필터링 및 표시
-  function filterByTag(tag) {
-    // URL 업데이트
-    window.history.pushState({}, '', '?tag=' + encodeURIComponent(tag));
-    
-    // 태그 제목 업데이트
-    document.getElementById('selected-tag-title').textContent = "'" + tag + "' 관련 게시물";
-    
-    // 최근 게시물 숨기고 필터링된 게시물 표시
-    document.getElementById('recent-posts').style.display = 'none';
-    document.getElementById('tag-posts').style.display = 'block';
-    
-    // 필터링된 게시물 생성
-    var filteredPosts = allPosts.filter(function(post) {
-      return post.tags.includes(tag.toLowerCase());
-    });
-    
-    var postsContainer = document.getElementById('filtered-posts');
-    postsContainer.innerHTML = '';
-    
-    if (filteredPosts.length > 0) {
-      filteredPosts.forEach(function(post) {
-        var formattedDate = new Date(post.date).toLocaleDateString('ko-KR', {
-          year: 'numeric',
-          month: 'long', 
-          day: 'numeric'
-        });
-        
-        var tagLinks = '';
-        post.tags.forEach(function(tag) {
-          tagLinks += '<a href="javascript:void(0);" onclick="filterByTag(\'' + tag + '\')" class="article__tag">' + tag + '</a>';
-        });
-        
-        var articleHTML = `
-          <div class="article article--grid animate col col-4 col-d-6 col-t-12">
-            <div class="article__inner">
-              <div class="article__head">
-                ${post.image ? `<a href="${post.url}" class="article__image"><img src="${post.image}" alt="${post.title}" loading="lazy"></a>` : ''}
-              </div>
-              <div class="article__content">
-                <div class="article__meta">
-                  <div class="article__tags">
-                    ${tagLinks}
-                  </div>
-                  <span class="article__date">•<time datetime="${post.date}">${formattedDate}</time></span>
-                </div>
-                <h2 class="article__title">
-                  <a href="${post.url}">${post.title}</a>
-                </h2>
-                <p class="article__excerpt">${post.excerpt}</p>
-              </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <div class="tag__info">
+          {% assign tag_name = site.tags[this_word] %}
+          {% for post in tag_name %}
+          {% if forloop.index==1 and post.image %}
+          <div class="tag__image">
+            <img class="lazy" data-src="{{ post.image | relative_url }}" alt="{{ this_word }}">
           </div>
-        `;
-        
-        postsContainer.innerHTML += articleHTML;
-      });
-    } else {
-      postsContainer.innerHTML = '<div class="col col-12"><p class="no-posts">이 태그에 해당하는 게시물이 없습니다.</p></div>';
+          {% endif %}
+          {% endfor %}
+          <span class="tag__counter">{{ site.tags[this_word].size }} {% if site.tags[this_word].size < 2 %}post {% else %}posts{% endif %} tagged</span>
+          <h1 class="tag__name">{{ this_word }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      {% for post in site.tags[this_word] %}
+        {% if post.title != null %}
+         {% include article.html %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+<!-- end tags -->
+
+{% endunless %}
+{% endfor %}
+
+<script>
+  var tag_name = decodeURIComponent(window.location.search.split('=')[1]);
+  if (tag_name) {
+    var el = document.getElementById(tag_name);
+    if (el) {
+      el.classList.remove("is-hidden");
     }
   }
-
-  // 페이지 로드시 URL 파라미터 확인
-  document.addEventListener('DOMContentLoaded', function() {
-    var tagParam = getParameterByName('tag');
-    if (tagParam) {
-      filterByTag(tagParam);
-    }
-  });
 </script>
-
-<style>
-  .tag-cloud {
-    margin: 30px 0 50px;
-    text-align: center;
-  }
-  
-  .tag-link {
-    display: inline-block;
-    margin: 8px 4px;
-    padding: 8px 16px;
-    font-weight: 500;
-    border-radius: 30px;
-    color: var(--dark);
-    background-color: var(--background-alt-color);
-    transition: all 0.3s ease;
-  }
-  
-  .tag-link:hover {
-    background-color: var(--primary-color);
-    color: var(--button-color);
-    transform: translateY(-2px);
-  }
-  
-  .tag-link span {
-    font-size: 0.8em;
-    opacity: 0.8;
-  }
-  
-  .recent-posts-title {
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 32px;
-  }
-  
-  .no-posts {
-    text-align: center;
-    margin: 40px 0;
-    font-size: 18px;
-    color: var(--text-color);
-  }
-
-  .all-posts-link {
-    background-color: var(--primary-color);
-    color: var(--button-color);
-    font-weight: 700;
-    margin-right: 12px;
-  }
-
-  .all-posts-link:hover {
-    background-color: var(--button-background-hover);
-    transform: translateY(-2px);
-  }
-  
-  @media (max-width: 768px) {
-    .recent-posts-title {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-  }
-</style>

@@ -10,9 +10,11 @@
       </div>
       {% endif %}
 
-      {% if post.image %}
+      <!-- 이미지가 있는 경우 또는 폴백 이미지 표시 (블로그 목록에서만) -->
+      {% assign display_image = post.image | default: site.data.settings.blog.fallback_image %}
+      {% if display_image %}
       <a href="{{ post.url | relative_url }}" class="article__image" aria-hidden="true" tabindex="-1">
-        <img class="lazy" data-src="{{ post.image | relative_url }}" alt="{{ post.title }}" decoding="async" loading="lazy">
+        <img class="lazy" data-src="{{ display_image | relative_url }}" alt="{{ post.title }}" decoding="async" loading="lazy">
       </a>
       {% endif %}
     </div>
@@ -27,7 +29,7 @@
         {% endfor %}
         </div>
         {% endif %}
-        <span class="article__date">•<time datetime="{{ post.date | date_to_xmlschema }}">{% assign date_format = site.minima.date_format | default: "%Y-%m-%d" %}{{ post.date | date: date_format }}</time></span>
+        <span class="article__date"><time datetime="{{ post.date | date_to_xmlschema }}">{% assign date_format = site.minima.date_format | default: "%Y년 %-m월 %-d일" %}{{ post.date | date: date_format }}</time></span>
       </div>
 
       <h2 class="article__title">

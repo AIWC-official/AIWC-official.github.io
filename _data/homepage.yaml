@@ -1,0 +1,13 @@
+faq:
+  enable: true
+  title: "자주 묻는 질문"
+  description: "AIWC에 대해 궁금한 점들을 정리했습니다."
+  items:
+    - title: "AIWC란 무엇인가요?"
+      description: "AI와 함께하는 체계적 웹소설 창작 지원 시스템입니다. 11단계 프로세스로 아이디어부터 완성까지 안내합니다."
+    - title: "웹소설 창작이 처음인데도 사용할 수 있나요?"
+      description: "네! 초보자를 위해 설계된 단계별 가이드로 누구나 쉽게 시작할 수 있습니다."
+    - title: "AI를 활용한 창작의 장점은 무엇인가요?"
+      description: "체계적인 프로세스와 창의적 아이디어 발굴로 더 효율적이고 독창적인 창작이 가능합니다."
+  button_text: "웹소설 코치 AI 챗봇과 대화하기"
+  button_link: "/contact/#faq"
