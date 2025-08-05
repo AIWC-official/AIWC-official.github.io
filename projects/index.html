@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Works
-description: Embark on a journey through a handpicked selection of projects that embody the essence of passion, simplicity, and creativity.
-image: '/images/01.jpg'
+title: AIWC 11단계 프로세스
+description: AIWC는 장르 키워드 융합과 체계적 11단계 프로세스로 아이디어부터 연재까지 웹소설 창작의 전 과정을 지원하는 혁신적인 시스템입니다.
+image: '/images/cover/process-cover.jpg'
 ---
 
 <div class="container">
@@ -18,7 +18,7 @@ image: '/images/01.jpg'
 
 <div class="container projects-page animate">
   <div class="row">
-    {% for project in site.projects reversed %}
+    {% for project in site.projects <!-- reversed --> %}
     <article class="project col col-3 col-d-6 col-t-12">
       <div class="project-content">
         <a href="{{ project.url }}" class="project__image">
@@ -36,4 +36,15 @@ image: '/images/01.jpg'
     </article>
     {% endfor %}
   </div>
+</div>
+
+<div class="container projects-page">
+  {% assign process_faq = site.data.process.faq %}
+  {% include section-faq.html 
+    title=process_faq.title
+    description=process_faq.description
+    items=process_faq.items
+    enable=process_faq.enable
+    button_text=process_faq.button_text
+    button_link=process_faq.button_link %}
 </div>
