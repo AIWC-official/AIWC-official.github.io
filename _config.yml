@@ -1,9 +1,9 @@
 #-------------------------------
-# 사이트 기본 정보
-title: "이태원쌤의 테크 블로그"
-description: "복잡한 기술을 쉽게 풀어, 실질적인 비즈니스 성과로"
-baseurl: "" # 하위 경로가 있는 경우 설정 (예: /blog)
-url: "https://aiwc.kr" # 도메인 주소
+# General Site Settings
+title: "AIWC (AI 웹소설 코치)"
+description: "AIWC와 함께 웹소설을 제작해 봅시다"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://aiwc.kr" # the base hostname & protocol for your site, e.g. http://example.com
 
 # 날짜 형식 설정
 minima:

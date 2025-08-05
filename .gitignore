@@ -1,0 +1,30 @@
+# Jekyll
+.sass-cache/
+.jekyll-cache/
+_site/
+.sass-cache/
+.jekyll-metadata
+# Bundler
+vendor/
+.bundle/
+# Node.js
+node_modules/
+# Logs
+*.log
+# Temporary files
+*.tmp
+*.temp
+# IDE files
+.idea/
+.vscode/
+# macOS files
+.DS_Store
+# Windows files
+Thumbs.db
+# Linux files
+*~
+# Backup files
+*.bak
+*.swp
+# Environment files
+.env
