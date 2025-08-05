@@ -1,0 +1,145 @@
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            background: #fff3cd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-card:hover .icon-container {
+            background: #f0ad4e;
+        }
+
+        .icon {
+            font-size: 36px;
+            color: #d4991a;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card:hover .icon {
+            color: white;
+        }
+
+        .contact-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-info {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .contact-info div {
+            margin-bottom: 8px;
+        }
+
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #0056b3;
+        }
+
+        .highlight {
+            color: #495057;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+            
+            .contact-card {
+                padding: 30px 20px;
+            }
+            
+            .contact-title {
+                font-size: 24px;
+            }
+        }
+</style>
+<div class="contact-container">
+		<div class="contact-card">
+				<div class="icon-container">
+						<div class="icon">📍</div>
+				</div>
+				<h2 class="contact-title">Location</h2>
+				<div class="contact-info">
+						<div>경기도 남양주시 별내중앙로</div>
+						<div>26, 진영NT위 1002-25호</div>
+				</div>
+		</div>
+
+		<div class="contact-card">
+				<div class="icon-container">
+						<div class="icon">📧</div>
+				</div>
+				<h2 class="contact-title">Email Us</h2>
+				<div class="contact-info">
+						<div><a href="mailto:help@aiwc.kr">help@aiwc.kr</a></div>
+						<div><a href="https://aiwc.kr" target="_blank">aiwc.kr</a></div>
+				</div>
+		</div>
+
+		<div class="contact-card">
+				<div class="icon-container">
+						<div class="icon">📞</div>
+				</div>
+				<h2 class="contact-title">Hotline</h2>
+				<div class="contact-info">
+						<div class="highlight">Call : <a href="tel:070-4110-0088">070-4110-0088</a></div>
+				</div>
+		</div>
+</div>

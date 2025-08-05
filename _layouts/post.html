@@ -15,18 +15,18 @@ layout: default
       {% endif %}
 
       <div class="post-meta">
-        {% if site.data.settings.author.author_name %}
+        <!-- {% if site.data.settings.author.author_name %}
         <a href="{{ '/about/' | relative_url }}" class="post-author">{{ site.data.settings.author.author_name }}</a>
-        ∙
-        {% endif %}
-        <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+        ∙ 
+        {% endif %}-->
+                <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y년 %-m월 %-d일" }}</time>
         ∙
         <span class="post-minutes">
           {% assign words = page.content | number_of_words %}
           {% if words < 360 %}
-            1 min read
+            1분 소요
           {% else %}
-            {{ words | divided_by:180 }} min read
+            {{ words | divided_by:180 }}분 소요
           {% endif %}
         </span>
       </div>
@@ -44,12 +44,10 @@ layout: default
         <iframe src="{{ page.video_embed }}" width="640" height="360" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
     </div>
-    {% else %}
-    {% if page.image %}
+    {% elsif page.image %}
     <div class="post-image">
       <img class="lazy" data-src="{{ page.image | relative_url }}" alt="{{ page.title }}">
     </div>
-    {% endif %}
     {% endif %}
 
     {% if page.image_caption %}
@@ -96,7 +94,7 @@ layout: default
   {% endfor %}
 
   <div class="page__related {{related}}">
-    <h2 class="page__related__title">You Might Also Like</h2>
+    <h2 class="page__related__title">이런 글도 읽어보세요</h2>
 
     <div class="row">
     {% for post in site.posts %}

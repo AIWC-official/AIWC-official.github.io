@@ -1,7 +1,7 @@
 /* Color Scheme */
 :root {
   --primary-color: #ffc71d;
-  --secondary-color: #2E8B57; /* 테크 그린; 기존: #0038ff */
+  --secondary-color: #0038ff;
   --white: #fff;
   --light-gray: #eaecef;
   --light-blue: #e4e6eb;
@@ -18,6 +18,7 @@
   --text-alt-color: var(--gray);
 
   --heading-font-color: var(--dark);
+  --heading-font-color-h2: rgb(2, 2, 99); /* 추가된 부분 */
 
   --link-color: var(--dark);
   --link-color-hover: var(--dark);
@@ -51,6 +52,7 @@
   --text-alt-color: var(--gray);
 
   --heading-font-color: var(--light-gray);
+  --heading-font-color-h2: rgb(211, 233, 164); /* 추가된 부분 */
 
   --link-color: var(--light-gray);
   --link-color-hover: var(--light-gray);

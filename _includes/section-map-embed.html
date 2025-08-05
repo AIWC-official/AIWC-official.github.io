@@ -1,0 +1,119 @@
+{% comment %}
+=================================================
+GOOGLE MAPS EMBED SECTION
+=================================================
+
+사용법:
+<!-- 복사할 코드 시작 -->
+{% include section-map-embed.html 
+   map_url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3159.1490006223316!2d127.1259107!3d37.6457009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca31446ac10d9%3A0x25f57eb25c63da2c!2z6rKf7IaM7IWc7L2U66as7JWE!5e0!3m2!1sko!2skr!4v1751515909699!5m2!1sko!2skr"
+   height="600px"
+   fullwidth=true %}
+<!-- 복사할 코드 끝 -->
+
+<!-- 기본 폭 사용 시 -->
+{% include section-map-embed.html 
+   map_url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3159..."
+   height="400px" %}
+
+필수 파라미터:
+- map_url: 구글 지도 임베드 URL (Google Maps에서 '공유' > '지도 퍼가기'에서 복사)
+
+선택 파라미터:
+- height: 지도 높이 (기본값: 600px)
+- fullwidth: true 설정 시 전체 폭 사용 (기본값: false)
+- title: 지도 제목 (접근성을 위한 iframe title)
+
+Google Maps 임베드 URL 생성 방법:
+1. Google Maps에서 원하는 위치 검색
+2. '공유' 버튼 클릭
+3. '지도 퍼가기' 탭 선택
+4. iframe의 src 속성값 복사하여 map_url에 사용
+
+예시 사용:
+<!-- Contact 페이지에서 -->
+{% include section-map-embed.html 
+   map_url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3159.1490006223316!2d127.1259107!3d37.6457009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca31446ac10d9%3A0x25f57eb25c63da2c!2z6rKf7IaM7IWc7L2U66as7JWE!5e0!3m2!1sko!2skr!4v1751515909699!5m2!1sko!2skr"
+   height="500px"
+   title="경기콘텐츠진흥원 위치"
+   fullwidth=false %}
+
+<!-- About 페이지에서 -->
+{% include section-map-embed.html 
+   map_url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.835994892473!2d126.97794031532048!3d37.566535979798914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eb88c77375%3A0x26bb249d0b9b6350!2z7Jik66eI66CI7IOd66a8!5e0!3m2!1sko!2skr!4v1673853000000!5m2!1sko!2skr"
+   height="700px"
+   title="오메가시티 위치"
+   fullwidth=true %}
+=================================================
+{% endcomment %}
+
+<!-- 구글 지도 Embed 섹션 -->
+{% if include.fullwidth %}
+<section class="section section--map section--fullwidth">
+  <div class="map-container">
+{% else %}
+<section class="section section--map">
+  <div class="container">
+{% endif %}
+    <div class="row">
+      <div class="col col-12">
+        
+        <!-- 구글 지도 iframe -->
+        <div class="map-embed">
+          <iframe 
+            src="{{ include.map_url }}" 
+            style="border:0; width: 100%; height: {{ include.height | default: '600px' }};" 
+            allowfullscreen="" 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="{{ include.title | default: 'Google Maps' }}">
+          </iframe>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 지도 전체폭 섹션을 위한 CSS -->
+<style>
+.section--fullwidth .map-container {
+  width: 100vw;
+  max-width: none !important;
+  margin-left: calc(-50vw + 50%);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.section--map .map-embed {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section--map iframe {
+  display: block;
+  width: 100%;
+}
+
+/* 반응형 지도 */
+@media (max-width: 768px) {
+  .section--map .map-embed iframe {
+    height: 300px !important;
+  }
+}
+
+/* 대안 방법: 특정 상황에서 사용 */
+.section--map.section--alternative {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0;
+}
+
+.section--map.section--alternative .map-container {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+}
+</style>

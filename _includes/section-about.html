@@ -23,7 +23,11 @@
                 <p class="section__description">{{ site.data.settings.about.about_description }}</p>
               {% endif %}
             </div>
-
+            <div class="section__button" style="text-align: center; padding-top: 50px;">
+              {% if site.data.settings.about.about_button_text %}
+                <a href="{{ site.data.settings.about.about_button_link }}" class="button button--primary">{{ site.data.settings.about.about_button_text }}</a>
+              {% endif %}              
+            </div>
           </div>
         </div>
       </div>

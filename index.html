@@ -1,16 +1,25 @@
 ---
 layout: default
-image: '/images/about.jpg'
+image: '/images/01.jpg'
 ---
 
 {% include section-hero.html %}
 
-{% include section-projects.html %}
+{% include section-about.html %}
+
+{% include section-process.html %}
 
 {% include section-testimonials.html %}
 
 {% include section-blog.html %}
 
-{% include section-about.html %}
-
-{% include section-faq.html %}
+<!-- 홈페이지 FAQ (챗봇 버튼 포함) -->
+{% assign homepage_faq = site.data.homepage.faq %}
+{% include section-faq.html 
+   title=homepage_faq.title
+   description=homepage_faq.description
+   items=homepage_faq.items
+   enable=homepage_faq.enable
+   button_text=homepage_faq.button_text
+   button_link=homepage_faq.button_link %}
+   

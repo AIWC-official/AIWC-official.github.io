@@ -1,0 +1,19 @@
+process_hero:
+  title: "11단계 프로세스"
+  description: "체계적 웹소설 창작 로드맵"
+
+faq:
+  enable: true
+  title: "프로세스 관련 FAQ"
+  description: "창작 프로세스에 대한 실용적인 질문과 답변입니다."
+  items:
+    - title: "11단계를 모두 따라야 하나요?"
+      description: "기본 흐름을 권장하지만, 필요에 따라 순서를 조정하거나 특정 단계에 집중할 수 있습니다."
+    - title: "각 단계는 얼마나 시간이 걸리나요?"
+      description: "단계별로 30분~2시간 정도, 전체 프로세스는 1-2주 내에 완료 가능합니다."
+    - title: "중간에 막혔을 때는 어떻게 하나요?"
+      description: "각 단계마다 브레인스토밍 도구와 대안 제시로 막힘 없이 진행할 수 있습니다."
+    - title: "프로세스 순서를 바꿔도 되나요?"
+      description: "기본 순서가 최적화되어 있지만, 개인의 창작 스타일에 맞게 유연하게 조정 가능합니다."
+  button_text: "창작 컨설팅 받기"
+  button_link: "/contact/#faq"

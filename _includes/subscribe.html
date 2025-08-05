@@ -13,12 +13,25 @@
               <p class="subscribe__description">{{ site.data.settings.mailchimp.mailchimp_description }}</p>
             {% endif %}
           </div>
-          <form class="subscribe-form validate"
-            action="{% if site.data.settings.mailchimp.mailchimp_identifier %}//{{site.data.settings.mailchimp.mailchimp_identifier}}{% else %}#{% endif %}" method="POST" id="membedded-subscribe-form" name="membedded-subscribe-form" target="_blank" novalidate>
-            <label class="screen-reader-text" for="mce-EMAIL">Email address</label>
-            <input class="subscribe-email required email" id="mce-EMAIL" type="text" name="EMAIL" placeholder="{% if site.data.settings.mailchimp.mailchimp_input_text %}{{ site.data.settings.mailchimp.mailchimp_input_text }}{% else %}Email address{% endif %}">
-            <button class="button button--primary subscribe-button" id="membedded-subscribe" type="submit" name="subscribe">{{ site.data.settings.mailchimp.mailchimp_button_text }}</button>
+          <form action="https://www.getdrip.com/forms/363838926/submissions" method="post" data-drip-embedded-form="363838926" id="drip-ef-363838926">
+            <div data-drip-attribute="description"></div>
+            <div>
+                <label for="drip-first-name">이름</label><br>
+                <input type="text" id="drip-first-name" name="fields[first_name]" value="">
+            </div>
+            <div>
+                <label for="drip-email">Email 주소</label><br>
+                <input type="email" id="drip-email" name="fields[email]" value="">
+            </div>
+            <div style="display: none;" aria-hidden="true">
+              <label for="website">Website</label><br>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="false" value="">
+            </div>
+            <div>
+              <input type="submit" value="뉴스레터 신청하기" data-drip-attribute="sign-up-button">
+            </div>
           </form>
+
           <div class="subscribe__bg">
             {% if site.data.settings.mailchimp.mailchimp_background_image %}
               <img class="lazy" data-src="{{site.data.settings.mailchimp.mailchimp_background_image}}" alt>
