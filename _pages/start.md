@@ -28,7 +28,9 @@ AIWC를 통한 웹소설 창작은 간단한 3단계로 이루어집니다:
 준비가 완료되면 간단히 "웹소설을 작성하고 싶어요"라고 입력하여 창작을 시작하세요.  
 AI가 여러분의 창작 과정을 단계별로 안내해드립니다.
 
-<div class="" style="width: 100%; height: null; position: relative; padding-top: 56.25%"><iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" allowtransparency="true"   src="https://adilo.bigcommand.com/watch/6XwVi2g6 "  frameborder="0" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen scrolling="no"></iframe></div>
+<p><iframe src="https://www.youtube.com/embed/MZG_Qs91xtQ" loading="lazy" frameborder="0" allowfullscreen></iframe></p>
+
+<!-- <div class="" style="width: 100%; height: null; position: relative; padding-top: 56.25%"><iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" allowtransparency="true"   src="https://adilo.bigcommand.com/watch/6XwVi2g6 "  frameborder="0" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen scrolling="no"></iframe></div> -->
 
 ---
 
