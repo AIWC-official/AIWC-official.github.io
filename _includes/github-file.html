@@ -1,13 +1,13 @@
 {% comment %}
 =================================================
-GITHUB FILE EMBED SECTION
+GITHUB FILE EMBED SECTION (API 기반)
 =================================================
 
 사용법:
 <!-- 기본 사용: 복사할 코드 시작 -->
 {% include github-file.html 
-   repo="leetaewon/landbot-button-click" 
-   file="landbot-button-click" %}
+   repo="leetaewon/WN-Memory-Manager" 
+   file="3. 분석 파일/10화 연재 계획.md" %}
 <!-- 복사할 코드 끝 -->
 
 <!-- 라인 범위 지정: 복사할 코드 시작 -->
@@ -32,8 +32,9 @@ GITHUB FILE EMBED SECTION
 - file: 파일 경로 (저장소 루트부터의 전체 경로)
 
 선택 파라미터:
-- lines: 표시할 라인 범위 (예: "1-50", "10-100") - 기본값: "1-50"
+- lines: 표시할 라인 범위 (예: "1-50", "10-100") - 전체 파일 표시시 생략
 - title: 헤더에 표시할 제목 - 기본값: 파일명
+- language: 구문 강조 언어 (예: "markdown", "javascript") - 자동 감지됨
 
 실제 사용 예시:
 <!-- 블로그 포스트에서 프롬프트 예시 보여주기 -->
@@ -47,6 +48,7 @@ GITHUB FILE EMBED SECTION
    repo="leetaewon/blog-snippets" 
    file="javascript/landbot-integration.js" 
    lines="1-25" 
+   language="javascript"
    title="랜드봇 통합 JavaScript 코드" %}
 
 <!-- 템플릿 일부만 미리보기 -->
@@ -59,58 +61,176 @@ GITHUB FILE EMBED SECTION
 {% endcomment %}
 
 <!-- _includes/github-file.html -->
-
 {% assign repo = include.repo %}
 {% assign file = include.file %}
 {% assign lines = include.lines %}
 {% assign title = include.title | default: file %}
+{% assign language = include.language %}
 
-<div class="github-embed">
+<!-- GitHub API URL 생성 -->
+{% assign api_url = "https://api.github.com/repos/" | append: repo | append: "/contents/" | append: file %}
+{% assign github_url = "https://github.com/" | append: repo | append: "/blob/main/" | append: file %}
+{% assign raw_url = "https://raw.githubusercontent.com/" | append: repo | append: "/main/" | append: file %}
+
+<!-- 고유 ID 생성 -->
+{% assign embed_id = repo | append: "-" | append: file | replace: "/", "-" | replace: " ", "-" | replace: ".", "-" %}
+
+<div class="github-file-embed" id="github-embed-{{ embed_id }}">
+  <!-- 헤더 -->
   <div class="github-embed-header">
     <div class="github-embed-title">
       <svg height="16" viewBox="0 0 16 16" width="16" class="github-icon">
         <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
       </svg>
       <span class="github-embed-filename">{{ title }}</span>
+      {% if lines %}
+        <span class="github-embed-lines">라인 {{ lines }}</span>
+      {% endif %}
     </div>
+    
     <div class="github-embed-actions">
-      <a href="https://github.com/{{ repo }}/blob/main/{{ file }}" target="_blank" class="github-embed-link">
+      <button class="github-embed-copy" onclick="copyGithubCode('{{ embed_id }}')" title="코드 복사">
+        <svg height="14" viewBox="0 0 14 14" width="14">
+          <path d="M10.5 0h-7C2.67 0 2 .67 2 1.5v8c0 .83.67 1.5 1.5 1.5h7c.83 0 1.5-.67 1.5-1.5v-8C12 .67 11.33 0 10.5 0zM11 9.5c0 .28-.22.5-.5.5h-7c-.28 0-.5-.22-.5-.5v-8c0-.28.22-.5.5-.5h7c.28 0 .5.22.5.5v8zM8.5 3h-5c-.28 0-.5.22-.5.5s.22.5.5.5h5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5zm0 2h-5c-.28 0-.5.22-.5.5s.22.5.5.5h5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5zm-2 2h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5z"/>
+        </svg>
+      </button>
+      <a href="{{ github_url }}" target="_blank" class="github-embed-link">
         <svg height="12" viewBox="0 0 12 12" width="12">
           <path d="M11 10.5v-9c0-.55-.45-1-1-1H2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h8c.55 0 1-.45 1-1zM8.5 6L6 8.5 7.5 10 11 6.5 7.5 3 6 4.5 8.5 6z"/>
         </svg>
-        GitHub에서 보기
+        GitHub
       </a>
     </div>
   </div>
   
-  <div class="github-embed-content">
-    <iframe 
-      src="https://github.com/{{ repo }}/blob/main/{{ file }}#L{{ lines | default: '1-50' }}"
-      width="100%" 
-      height="400px"
-      frameborder="0"
-      loading="lazy"
-      sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-      style="border: 1px solid #d1d5da; border-radius: 6px;">
-    </iframe>
+  <!-- 로딩 상태 -->
+  <div class="github-embed-loading" id="loading-{{ embed_id }}">
+    <div class="loading-spinner"></div>
+    <span>파일을 불러오는 중...</span>
   </div>
   
-  <!-- 대안: GitHub API를 통한 파일 내용 직접 표시 -->
-  <noscript>
-    <div class="github-embed-fallback">
-      <p>GitHub 파일을 표시할 수 없습니다. <a href="https://github.com/{{ repo }}/blob/main/{{ file }}" target="_blank">직접 GitHub에서 확인하세요</a></p>
-    </div>
-  </noscript>
+  <!-- 파일 내용 -->
+  <div class="github-embed-content" id="content-{{ embed_id }}" style="display: none;">
+    <pre><code id="code-{{ embed_id }}" class="{% if language %}language-{{ language }}{% endif %}"></code></pre>
+  </div>
+  
+  <!-- 에러 상태 -->
+  <div class="github-embed-error" id="error-{{ embed_id }}" style="display: none;">
+    <p>파일을 불러올 수 없습니다.</p>
+    <a href="{{ github_url }}" target="_blank">직접 GitHub에서 확인하기 →</a>
+  </div>
 </div>
 
-<!-- 스타일링 -->
+<script>
+// 페이지 로드 시 파일 내용 가져오기
+document.addEventListener('DOMContentLoaded', function() {
+  loadGithubFile('{{ embed_id }}', '{{ api_url }}', '{{ raw_url }}', '{{ lines }}');
+});
+
+// GitHub 파일 내용 로드 함수
+async function loadGithubFile(embedId, apiUrl, rawUrl, lines) {
+  const loadingEl = document.getElementById('loading-' + embedId);
+  const contentEl = document.getElementById('content-' + embedId);
+  const errorEl = document.getElementById('error-' + embedId);
+  const codeEl = document.getElementById('code-' + embedId);
+  
+  try {
+    // Raw URL로 직접 파일 내용 가져오기
+    const response = await fetch(rawUrl);
+    if (!response.ok) throw new Error('파일을 찾을 수 없습니다');
+    
+    let content = await response.text();
+    
+    // 라인 범위 처리
+    if (lines) {
+      const [start, end] = lines.split('-').map(n => parseInt(n.trim()));
+      const contentLines = content.split('\n');
+      if (start && end) {
+        content = contentLines.slice(start - 1, end).join('\n');
+      } else if (start) {
+        content = contentLines.slice(start - 1).join('\n');
+      }
+    }
+    
+    // 내용 표시
+    codeEl.textContent = content;
+    
+    // 구문 강조 적용 (Prism.js가 있는 경우)
+    if (typeof Prism !== 'undefined') {
+      Prism.highlightElement(codeEl);
+    }
+    
+    // 상태 변경
+    loadingEl.style.display = 'none';
+    contentEl.style.display = 'block';
+    
+  } catch (error) {
+    console.error('GitHub 파일 로드 실패:', error);
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+  }
+}
+
+// 코드 복사 기능
+function copyGithubCode(embedId) {
+  const codeEl = document.getElementById('code-' + embedId);
+  const text = codeEl.textContent;
+  
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      showCopyFeedback(embedId);
+    }).catch(() => {
+      fallbackCopyCode(text, embedId);
+    });
+  } else {
+    fallbackCopyCode(text, embedId);
+  }
+}
+
+// 복사 폴백 함수
+function fallbackCopyCode(text, embedId) {
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+  
+  try {
+    document.execCommand('copy');
+    showCopyFeedback(embedId);
+  } catch (err) {
+    console.error('복사 실패:', err);
+  }
+  
+  document.body.removeChild(textArea);
+}
+
+// 복사 완료 피드백
+function showCopyFeedback(embedId) {
+  const button = document.querySelector(`#github-embed-${embedId} .github-embed-copy`);
+  const originalHTML = button.innerHTML;
+  
+  button.innerHTML = `
+    <svg height="14" viewBox="0 0 14 14" width="14">
+      <path d="M6 9L2 5l1.5-1.5L6 6l4.5-4.5L12 3z" fill="currentColor"/>
+    </svg>
+  `;
+  button.style.color = '#28a745';
+  
+  setTimeout(() => {
+    button.innerHTML = originalHTML;
+    button.style.color = '';
+  }, 2000);
+}
+</script>
+
 <style>
-.github-embed {
+.github-file-embed {
   margin: 20px 0;
   border: 1px solid #d1d5da;
   border-radius: 6px;
   overflow: hidden;
   background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
 .github-embed-header {
@@ -136,15 +256,24 @@ GITHUB FILE EMBED SECTION
 
 .github-embed-filename {
   font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.github-embed-lines {
+  background: #ddf4ff;
+  color: #0969da;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .github-embed-actions {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
-.github-embed-link {
+.github-embed-copy, .github-embed-link {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -153,38 +282,71 @@ GITHUB FILE EMBED SECTION
   font-size: 12px;
   padding: 4px 8px;
   border-radius: 3px;
-  transition: color 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
-.github-embed-link:hover {
+.github-embed-copy {
+  border: none;
+  background: none;
+}
+
+.github-embed-copy:hover, .github-embed-link:hover {
   color: #0969da;
   background: #f3f4f6;
 }
 
-.github-embed-content {
-  position: relative;
-  min-height: 400px;
-}
-
-.github-embed-content iframe {
-  width: 100%;
-  min-height: 400px;
-  background: #fff;
-}
-
-.github-embed-fallback {
-  padding: 20px;
+.github-embed-loading, .github-embed-error {
+  padding: 40px 20px;
   text-align: center;
   color: #656d76;
   background: #f6f8fa;
 }
 
-.github-embed-fallback a {
-  color: #0969da;
-  text-decoration: none;
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e1e4e8;
+  border-top: 2px solid #0969da;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 12px;
 }
 
-.github-embed-fallback a:hover {
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.github-embed-content {
+  position: relative;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.github-embed-content pre {
+  margin: 0;
+  padding: 16px;
+  background: #f6f8fa;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.github-embed-content code {
+  background: none;
+  padding: 0;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: pre;
+}
+
+.github-embed-error a {
+  color: #0969da;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.github-embed-error a:hover {
   text-decoration: underline;
 }
 
@@ -196,14 +358,15 @@ GITHUB FILE EMBED SECTION
     gap: 8px;
   }
   
-  .github-embed-content iframe {
-    min-height: 300px;
+  .github-embed-actions {
+    align-self: stretch;
+    justify-content: flex-end;
   }
 }
 
 /* 다크모드 지원 */
 @media (prefers-color-scheme: dark) {
-  .github-embed {
+  .github-file-embed {
     border-color: #30363d;
     background: #0d1117;
   }
@@ -217,23 +380,37 @@ GITHUB FILE EMBED SECTION
     color: #f0f6fc;
   }
   
-  .github-embed-link {
+  .github-embed-lines {
+    background: #1f6feb;
+    color: #ffffff;
+  }
+  
+  .github-embed-copy, .github-embed-link {
     color: #8b949e;
   }
   
-  .github-embed-link:hover {
+  .github-embed-copy:hover, .github-embed-link:hover {
     color: #58a6ff;
     background: #21262d;
   }
   
-  .github-embed-fallback {
+  .github-embed-loading, .github-embed-error {
     background: #161b22;
     color: #8b949e;
   }
   
-  .github-embed-content iframe {
-    background: #0d1117;
-    filter: invert(1) hue-rotate(180deg);
+  .github-embed-content pre {
+    background: #161b22;
+    color: #f0f6fc;
+  }
+  
+  .loading-spinner {
+    border-color: #30363d;
+    border-top-color: #58a6ff;
+  }
+  
+  .github-embed-error a {
+    color: #58a6ff;
   }
 }
 </style>
