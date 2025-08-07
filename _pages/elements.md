@@ -70,7 +70,13 @@ A paragraph looks like this — Globally incubate standards compliant channels b
 
 ***
 
-
+<!-- 라인 범위 지정: 복사할 코드 시작 -->
+{% include github-file.html 
+   repo="leetaewon/WN-Memory-Manager" 
+   file="3. 분석 파일/10화 연재 계획.md" 
+   lines="1-15" 
+   title="10화 연재 계획" %}
+<!-- 복사할 코드 끝 -->
 
 ## Syntax Highlighter
 

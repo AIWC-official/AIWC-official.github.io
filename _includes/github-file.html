@@ -1,0 +1,239 @@
+{% comment %}
+=================================================
+GITHUB FILE EMBED SECTION
+=================================================
+
+사용법:
+<!-- 기본 사용: 복사할 코드 시작 -->
+{% include github-file.html 
+   repo="leetaewon/landbot-button-click" 
+   file="landbot-button-click" %}
+<!-- 복사할 코드 끝 -->
+
+<!-- 라인 범위 지정: 복사할 코드 시작 -->
+{% include github-file.html 
+   repo="leetaewon/aiwc-episodes" 
+   file="episode-01/prompts/character-development.md" 
+   lines="1-30" 
+   title="캐릭터 개발 프롬프트" %}
+<!-- 복사할 코드 끝 -->
+
+<!-- 서브폴더 파일: 복사할 코드 시작 -->
+{% include github-file.html 
+   repo="AIWC-official/templates" 
+   file="2.templates/2_01-concept.md" 
+   lines="10-50" 
+   title="웹소설 컨셉 템플릿" %}
+<!-- 복사할 코드 끝 -->
+
+
+필수 파라미터:
+- repo: GitHub 저장소 (사용자명/저장소명 형식)
+- file: 파일 경로 (저장소 루트부터의 전체 경로)
+
+선택 파라미터:
+- lines: 표시할 라인 범위 (예: "1-50", "10-100") - 기본값: "1-50"
+- title: 헤더에 표시할 제목 - 기본값: 파일명
+
+실제 사용 예시:
+<!-- 블로그 포스트에서 프롬프트 예시 보여주기 -->
+{% include github-file.html 
+   repo="leetaewon/aiwc-workthrough-episodes" 
+   file="episode-01/character-prompt.md" 
+   title="1화: 매력적인 주인공 만들기 프롬프트" %}
+
+<!-- 코드 스니펫 보여주기 -->
+{% include github-file.html 
+   repo="leetaewon/blog-snippets" 
+   file="javascript/landbot-integration.js" 
+   lines="1-25" 
+   title="랜드봇 통합 JavaScript 코드" %}
+
+<!-- 템플릿 일부만 미리보기 -->
+{% include github-file.html 
+   repo="AIWC-official/premium-templates" 
+   file="advanced/story-structure.md" 
+   lines="1-40" 
+   title="고급 스토리 구조 템플릿 미리보기" %}
+=================================================
+{% endcomment %}
+
+<!-- _includes/github-file.html -->
+
+{% assign repo = include.repo %}
+{% assign file = include.file %}
+{% assign lines = include.lines %}
+{% assign title = include.title | default: file %}
+
+<div class="github-embed">
+  <div class="github-embed-header">
+    <div class="github-embed-title">
+      <svg height="16" viewBox="0 0 16 16" width="16" class="github-icon">
+        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+      </svg>
+      <span class="github-embed-filename">{{ title }}</span>
+    </div>
+    <div class="github-embed-actions">
+      <a href="https://github.com/{{ repo }}/blob/main/{{ file }}" target="_blank" class="github-embed-link">
+        <svg height="12" viewBox="0 0 12 12" width="12">
+          <path d="M11 10.5v-9c0-.55-.45-1-1-1H2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h8c.55 0 1-.45 1-1zM8.5 6L6 8.5 7.5 10 11 6.5 7.5 3 6 4.5 8.5 6z"/>
+        </svg>
+        GitHub에서 보기
+      </a>
+    </div>
+  </div>
+  
+  <div class="github-embed-content">
+    <iframe 
+      src="https://github.com/{{ repo }}/blob/main/{{ file }}#L{{ lines | default: '1-50' }}"
+      width="100%" 
+      height="400px"
+      frameborder="0"
+      loading="lazy"
+      sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      style="border: 1px solid #d1d5da; border-radius: 6px;">
+    </iframe>
+  </div>
+  
+  <!-- 대안: GitHub API를 통한 파일 내용 직접 표시 -->
+  <noscript>
+    <div class="github-embed-fallback">
+      <p>GitHub 파일을 표시할 수 없습니다. <a href="https://github.com/{{ repo }}/blob/main/{{ file }}" target="_blank">직접 GitHub에서 확인하세요</a></p>
+    </div>
+  </noscript>
+</div>
+
+<!-- 스타일링 -->
+<style>
+.github-embed {
+  margin: 20px 0;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.github-embed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: #f6f8fa;
+  border-bottom: 1px solid #d1d5da;
+  font-size: 14px;
+}
+
+.github-embed-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #24292f;
+}
+
+.github-icon {
+  fill: #656d76;
+}
+
+.github-embed-filename {
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.github-embed-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.github-embed-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #656d76;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  transition: color 0.2s;
+}
+
+.github-embed-link:hover {
+  color: #0969da;
+  background: #f3f4f6;
+}
+
+.github-embed-content {
+  position: relative;
+  min-height: 400px;
+}
+
+.github-embed-content iframe {
+  width: 100%;
+  min-height: 400px;
+  background: #fff;
+}
+
+.github-embed-fallback {
+  padding: 20px;
+  text-align: center;
+  color: #656d76;
+  background: #f6f8fa;
+}
+
+.github-embed-fallback a {
+  color: #0969da;
+  text-decoration: none;
+}
+
+.github-embed-fallback a:hover {
+  text-decoration: underline;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .github-embed-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .github-embed-content iframe {
+    min-height: 300px;
+  }
+}
+
+/* 다크모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .github-embed {
+    border-color: #30363d;
+    background: #0d1117;
+  }
+  
+  .github-embed-header {
+    background: #161b22;
+    border-bottom-color: #30363d;
+  }
+  
+  .github-embed-title {
+    color: #f0f6fc;
+  }
+  
+  .github-embed-link {
+    color: #8b949e;
+  }
+  
+  .github-embed-link:hover {
+    color: #58a6ff;
+    background: #21262d;
+  }
+  
+  .github-embed-fallback {
+    background: #161b22;
+    color: #8b949e;
+  }
+  
+  .github-embed-content iframe {
+    background: #0d1117;
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
+</style>
