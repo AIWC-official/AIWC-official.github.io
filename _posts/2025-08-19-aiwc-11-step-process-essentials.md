@@ -2,7 +2,7 @@
 layout: post
 title: "AIWC 11단계 프로세스 핵심 가이드: 아이디어에서 완성작까지"
 description: "막연한 아이디어를 완성된 웹소설로 만드는 AIWC 11단계 프로세스의 핵심을 정리했습니다. 체계적 창작의 로드맵을 확인하세요."
-date: 2025-08-14
+date: 2025-08-19
 tags: [AIWC-프로세스, 창작-로드맵, 실전-가이드, 체계적-창작]
 author: AIWC
 permalink: /blog/aiwc-11-step-process-essentials

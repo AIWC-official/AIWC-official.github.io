@@ -3,12 +3,18 @@ layout: post
 title: Crafting compelling visual narratives through artistic expression
 description: Explore how the fusion of art and technology is transforming the creative landscape. In this post, I delve into the innovative tools and techniques that are pushing the boundaries of traditional art forms.
 date: 2024-07-12 15:01:35 +0300
-image: '/images/02.jpg'
-image_caption: 'Photo by [Caleb George](https://unsplash.com/photos/green-and-brown-leaf-plant-5sF6NrB1MEg) on [Unsplash](https://unsplash.com/)'
 tags: [Inspiration]
 ---
 
-Writing is a profound form of artistic expression that complements visual arts. For artists, designers, and thinkers, writing serves as a tool for self-discovery, storytelling, and communication. It allows us to articulate our thoughts, document our journeys, and connect with others on a deeper level. Keeping a creative journal is a powerful practice. It allows for documenting thoughts, ideas, and experiences, providing a space for reflection and growth. Regular journaling helps in clarifying complex ideas and tracking our creative evolution over time.
+Writing is a profound form of artistic expression that complements visual arts. For artists, designers, and thinkers, writing serves as a tool for self-discovery, storytelling, and communication. It allows us to articulate our thoughts, document our journeys, and connect with others on a deeper level. Keeping a creative journal is a powerful practice. It allows for documenting thoughts, ideas, and experiences, providing a space for reflection and growth. Regular journaling helps in clarifying complex ideas and tracking our creative evolution over time. haha
+
+<!-- 라인 범위 지정: 복사할 코드 시작 -->
+{% include github-file.html 
+   repo="leetaewon/WN-Memory-Manager" 
+   file="3. 분석 파일/10화 연재 계획.md" 
+   lines="1-50" 
+   title="10화 연재 계획" %}
+<!-- 복사할 코드 끝 -->
 
 ## Writing can be integrated with other art forms
 
